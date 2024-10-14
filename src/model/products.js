@@ -12,9 +12,21 @@ function listProducts() {
     units_on_order
     FROM products
     `);
+    return select_products.all();
 }
 
+function searchProducts(string) {
+    db.prepare(/*sql*/ `
+    SELECT
+    id,
+    db.name
+    FROM products
+    WHERE product_name LIKE ?
+    `);
+    return search_products.all
+
+} 
 
 
 
-module.exports = {listProducts};
+module.exports = {listProducts, searchProducts};
