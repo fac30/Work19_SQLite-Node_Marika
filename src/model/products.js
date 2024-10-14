@@ -2,7 +2,7 @@ const { listProducts } = require("../../solution/model/products.js");
 const db = require("../database/db.js");
 
 function listProducts() {
-    db.prepare(/*sql*/ `
+    const select_products = db.prepare(/*sql*/ `
     SELECT
     id,
     product_name AS name, 
@@ -16,17 +16,27 @@ function listProducts() {
 }
 
 function searchProducts(string) {
-    db.prepare(/*sql*/ `
+    const search_products = db.prepare(/*sql*/ `
     SELECT
     id,
-    db.name
+    product.name AS name
     FROM products
     WHERE product_name LIKE ?
     `);
-    return search_products.all
+    return search_products.all(`%${string}%`)
 
 } 
 
+function getProduct(id) {
+    const get_products = db.prepare(/*sql*/ `
+        SELECT
+        id,
+        product_name AS name
+        FROM products
+        WHERE id = ?
+        `);
+        return search_products.get(id);
+};
 
 
-module.exports = {listProducts, searchProducts};
+module.exports = {listProducts, searchProducts, getProduct};
