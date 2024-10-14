@@ -8,7 +8,8 @@ function listProducts() {
       quantity_per_unit,
       unit_price,
       units_in_stock,
-      units_on_order
+      units_on_order,
+      (unit_price * units_in_stock) AS stock_value
     FROM products
   `);
   return select_products.all();
