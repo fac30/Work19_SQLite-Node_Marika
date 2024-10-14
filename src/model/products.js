@@ -6,10 +6,10 @@ function listProducts() {
       id,
       product_name AS name,
       quantity_per_unit,
-      unit_price,
+      printf('£%.2f', unit_price) AS unit_price,
       units_in_stock,
       units_on_order,
-      (unit_price * units_in_stock) AS stock_value
+      printf('£%.2f'unit_price * units_in_stock) AS stock_value
     FROM products
   `);
   return select_products.all();
